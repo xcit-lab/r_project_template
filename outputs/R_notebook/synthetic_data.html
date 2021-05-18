@@ -286,64 +286,29 @@ div.tocify {
 <div id="about" class="section level2">
 <h2>About</h2>
 <p>We want to create a synthetic dataset from an existing one. The synthetics dataset must have the same columns as the original dataset and the values within each columns must of the same type as those in the original dataset.</p>
-<p>Why is this useful? Reasons for creating synthetic datasets inlcude: - anonymizing datasets - create dummy datasets for testing code</p>
+<p>Why is this useful?</p>
+<p>Reasons for creating synthetic datasets inlcude:</p>
+<ul>
+<li>anonymizing datasets</li>
+<li>create dummy datasets for testing code</li>
+</ul>
 </div>
 <div id="requirements" class="section level2">
 <h2>Requirements</h2>
-<p>For this tutorial we will use the following packages: - tidyverse: (default) for basic data manipulation - wakefield: to create a dataset with different kinds of columns - synthpop: to synthesize a dataset</p>
+<p>For this tutorial we will use the following packages:</p>
+<ul>
+<li>tidyverse: (default) for basic data manipulation</li>
+<li>wakefield: to create a dataset with different kinds of columns</li>
+<li>synthpop: to synthesize a dataset</li>
+</ul>
 <p>Make sure you have these packages installed before running the code below.</p>
-<pre class="r"><code>## install packages if needed
-# install.packages(&quot;synthpop&quot;)
-# install.packages(&quot;wakefield&quot;)
-# install.packages(&quot;tidyverse&quot;)
-
-## load packages
-library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-## ✓ tibble  3.1.2     ✓ dplyr   1.0.6
-## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-## ✓ readr   1.4.0     ✓ forcats 0.5.0</code></pre>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;tibble&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(wakefield)</code></pre>
-<pre><code>## Warning: package &#39;wakefield&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## 
-## Attaching package: &#39;wakefield&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     id</code></pre>
-<pre class="r"><code>library(synthpop)</code></pre>
-<pre><code>## Warning: package &#39;synthpop&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Find out more at https://www.synthpop.org.uk/</code></pre>
 </div>
 <div id="step-1.-create-a-fake-dataset" class="section level2">
 <h2>Step 1. Create a fake dataset</h2>
 <p>We use the <code>wakefield</code> package and the code described <a href="https://github.com/trinker/wakefield">here</a> to generate a fake dataset.</p>
-<pre class="r"><code>df &lt;- r_data_frame(
-    n = 10,
-    id,
-    race,
-    age,
-    sex,
-    hour,
-    iq,
-    height,
-    died
-)</code></pre>
-<pre><code>## Warning: `tbl_df()` was deprecated in dplyr 1.0.0.
-## Please use `tibble::as_tibble()` instead.</code></pre>
-<pre class="r"><code>df</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Race"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["int"],"align":["right"]},{"label":["Sex"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hour"],"name":[5],"type":["times"],"align":["right"]},{"label":["IQ"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Height"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Died"],"name":[8],"type":["lgl"],"align":["right"]}],"data":[{"1":"01","2":"White","3":"52","4":"Male","5":"01:00:00","6":"91","7":"71","8":"TRUE"},{"1":"02","2":"White","3":"81","4":"Male","5":"03:00:00","6":"99","7":"73","8":"TRUE"},{"1":"03","2":"White","3":"52","4":"Male","5":"09:00:00","6":"112","7":"73","8":"FALSE"},{"1":"04","2":"Black","3":"46","4":"Female","5":"13:00:00","6":"88","7":"71","8":"TRUE"},{"1":"05","2":"White","3":"85","4":"Male","5":"14:00:00","6":"95","7":"62","8":"FALSE"},{"1":"06","2":"White","3":"26","4":"Male","5":"18:00:00","6":"109","7":"72","8":"FALSE"},{"1":"07","2":"Hispanic","3":"26","4":"Male","5":"19:00:00","6":"99","7":"74","8":"FALSE"},{"1":"08","2":"Hispanic","3":"51","4":"Female","5":"19:30:00","6":"100","7":"69","8":"TRUE"},{"1":"09","2":"White","3":"38","4":"Female","5":"20:00:00","6":"91","7":"66","8":"TRUE"},{"1":"10","2":"Black","3":"70","4":"Female","5":"22:00:00","6":"89","7":"69","8":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["ID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Race"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["int"],"align":["right"]},{"label":["Sex"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hour"],"name":[5],"type":["times"],"align":["right"]},{"label":["IQ"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Height"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Died"],"name":[8],"type":["lgl"],"align":["right"]}],"data":[{"1":"01","2":"White","3":"32","4":"Female","5":"01:00:00","6":"92","7":"64","8":"TRUE"},{"1":"02","2":"White","3":"52","4":"Male","5":"02:00:00","6":"90","7":"69","8":"TRUE"},{"1":"03","2":"White","3":"68","4":"Male","5":"02:30:00","6":"108","7":"71","8":"TRUE"},{"1":"04","2":"Asian","3":"47","4":"Female","5":"03:30:00","6":"114","7":"71","8":"TRUE"},{"1":"05","2":"White","3":"43","4":"Male","5":"07:00:00","6":"121","7":"69","8":"TRUE"},{"1":"06","2":"White","3":"32","4":"Female","5":"08:30:00","6":"96","7":"69","8":"FALSE"},{"1":"07","2":"Asian","3":"22","4":"Male","5":"10:00:00","6":"100","7":"73","8":"TRUE"},{"1":"08","2":"Asian","3":"26","4":"Male","5":"11:30:00","6":"90","7":"69","8":"FALSE"},{"1":"09","2":"White","3":"40","4":"Male","5":"12:00:00","6":"103","7":"66","8":"TRUE"},{"1":"10","2":"White","3":"45","4":"Male","5":"22:00:00","6":"98","7":"70","8":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -356,57 +321,36 @@ library(tidyverse)</code></pre>
 <p>A simple methods to create a mock-up of a dataset is to shuffle the rows within each column of the original dataset. The consequence of this procedure is a dataset that has the same size and shape as the original dataset but is anonymized. Note however that the relationships between variables are not preserved by this method. For example, if in the original dataset there is a correlation between IQ and Height, this relationship will not exist (or exist by chance) in the mock-up dataset.</p>
 <p>Thus, while mock-up data created using this method can be used to test code and be confident that that code will also run on actual data, the results you get with the mock-up data are unrelated to the results you will get using the actual data.</p>
 <p>First, we define a custom function that loops over all columns of a dataframe and shuffles the rows within the column:</p>
-<pre class="r"><code>shuffle_cols &lt;- function(df){
-  row_n &lt;- nrow(df)
-  col_n &lt;- ncol(df)
-  for (i in 2:col_n){
-    random_order &lt;- sample(row_n)
-    df[,i] &lt;- df[random_order,i]
-  }
-  df  
-}</code></pre>
 <p>Then we apply that function to the original dataset to create a synthetic dataset:</p>
-<pre class="r"><code>df_shuffle &lt;- shuffle_cols(df)
-df_shuffle</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Race"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["int"],"align":["right"]},{"label":["Sex"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hour"],"name":[5],"type":["times"],"align":["right"]},{"label":["IQ"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Height"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Died"],"name":[8],"type":["lgl"],"align":["right"]}],"data":[{"1":"01","2":"White","3":"52","4":"Male","5":"09:00:00","6":"91","7":"69","8":"FALSE"},{"1":"02","2":"Black","3":"38","4":"Female","5":"19:30:00","6":"95","7":"66","8":"TRUE"},{"1":"03","2":"White","3":"26","4":"Male","5":"20:00:00","6":"88","7":"73","8":"FALSE"},{"1":"04","2":"White","3":"52","4":"Female","5":"18:00:00","6":"112","7":"72","8":"TRUE"},{"1":"05","2":"Hispanic","3":"81","4":"Male","5":"03:00:00","6":"91","7":"69","8":"TRUE"},{"1":"06","2":"White","3":"46","4":"Female","5":"13:00:00","6":"99","7":"71","8":"TRUE"},{"1":"07","2":"Hispanic","3":"85","4":"Male","5":"14:00:00","6":"100","7":"71","8":"TRUE"},{"1":"08","2":"White","3":"70","4":"Female","5":"01:00:00","6":"89","7":"74","8":"FALSE"},{"1":"09","2":"Black","3":"51","4":"Male","5":"22:00:00","6":"109","7":"73","8":"FALSE"},{"1":"10","2":"White","3":"26","4":"Male","5":"19:00:00","6":"99","7":"62","8":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["ID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Race"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["int"],"align":["right"]},{"label":["Sex"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hour"],"name":[5],"type":["times"],"align":["right"]},{"label":["IQ"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Height"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Died"],"name":[8],"type":["lgl"],"align":["right"]}],"data":[{"1":"01","2":"White","3":"26","4":"Male","5":"02:00:00","6":"100","7":"69","8":"TRUE"},{"1":"02","2":"White","3":"68","4":"Male","5":"11:30:00","6":"103","7":"73","8":"TRUE"},{"1":"03","2":"White","3":"40","4":"Male","5":"01:00:00","6":"90","7":"71","8":"TRUE"},{"1":"04","2":"Asian","3":"45","4":"Male","5":"12:00:00","6":"108","7":"69","8":"FALSE"},{"1":"05","2":"White","3":"32","4":"Male","5":"03:30:00","6":"121","7":"69","8":"TRUE"},{"1":"06","2":"Asian","3":"43","4":"Female","5":"02:30:00","6":"98","7":"69","8":"TRUE"},{"1":"07","2":"White","3":"52","4":"Female","5":"08:30:00","6":"114","7":"70","8":"FALSE"},{"1":"08","2":"Asian","3":"22","4":"Male","5":"10:00:00","6":"90","7":"71","8":"TRUE"},{"1":"09","2":"White","3":"47","4":"Female","5":"22:00:00","6":"92","7":"66","8":"FALSE"},{"1":"10","2":"White","3":"32","4":"Male","5":"07:00:00","6":"96","7":"64","8":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 <div id="variant-2-preserve-relationships-in-the-dataset" class="section level3">
 <h3>Variant 2: Preserve relationships in the dataset</h3>
 <p>Synthesizing data while preserving relationships is harder to do. Luckily, there’s an R package for this (for more details, see <a href="https://www.synthpop.org.uk/get-started.html">this</a>.</p>
-<pre class="r"><code># using the syn package is very easy...
-mysyn &lt;- syn(df)</code></pre>
 <pre><code>## 
 ## Variable(s): ID have been changed from character to factor.
 ## Synthesis
 ## -----------
 ##  ID Race Age Sex Hour IQ Height Died</code></pre>
-<pre class="r"><code># ... but the outpout of that function is not dataframe. Thus we need to extract data from mysyn (and arrange it by ID)
-mysyn &lt;- mysyn$syn %&gt;% arrange(ID)
-mysyn</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Race"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Sex"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hour"],"name":[5],"type":["times"],"align":["right"]},{"label":["IQ"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Height"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Died"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"03","2":"White","3":"46","4":"Male","5":"20:00:00","6":"88","7":"73","8":"1"},{"1":"03","2":"White","3":"85","4":"Female","5":"20:00:00","6":"99","7":"74","8":"1"},{"1":"04","2":"White","3":"52","4":"Female","5":"19:00:00","6":"91","7":"73","8":"2"},{"1":"05","2":"Hispanic","3":"26","4":"Male","5":"22:00:00","6":"95","7":"74","8":"2"},{"1":"05","2":"White","3":"51","4":"Male","5":"09:00:00","6":"99","7":"71","8":"2"},{"1":"06","2":"White","3":"52","4":"Female","5":"22:00:00","6":"109","7":"71","8":"2"},{"1":"07","2":"White","3":"38","4":"Female","5":"09:00:00","6":"91","7":"62","8":"2"},{"1":"08","2":"White","3":"70","4":"Male","5":"19:30:00","6":"91","7":"69","8":"1"},{"1":"09","2":"White","3":"85","4":"Male","5":"19:00:00","6":"109","7":"71","8":"1"},{"1":"10","2":"White","3":"85","4":"Female","5":"01:00:00","6":"88","7":"69","8":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["ID"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Race"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Sex"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hour"],"name":[5],"type":["times"],"align":["right"]},{"label":["IQ"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Height"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Died"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"01","2":"White","3":"40","4":"Male","5":"22:00:00","6":"114","7":"66","8":"2"},{"1":"02","2":"White","3":"22","4":"Female","5":"03:30:00","6":"96","7":"66","8":"2"},{"1":"03","2":"White","3":"40","4":"Male","5":"02:00:00","6":"108","7":"73","8":"2"},{"1":"04","2":"White","3":"22","4":"Female","5":"02:30:00","6":"108","7":"73","8":"1"},{"1":"05","2":"White","3":"43","4":"Male","5":"01:00:00","6":"103","7":"71","8":"2"},{"1":"06","2":"Asian","3":"47","4":"Female","5":"07:00:00","6":"92","7":"71","8":"2"},{"1":"07","2":"White","3":"32","4":"Female","5":"12:00:00","6":"90","7":"70","8":"2"},{"1":"07","2":"Asian","3":"26","4":"Male","5":"08:30:00","6":"103","7":"71","8":"2"},{"1":"10","2":"White","3":"47","4":"Female","5":"02:30:00","6":"121","7":"69","8":"2"},{"1":"10","2":"White","3":"68","4":"Male","5":"01:00:00","6":"108","7":"71","8":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Note: <code>syn()</code> did not keep the data format for the boolean variable <code>Died</code>. To keep the datasets consistent, you need to reformat that columns. One might want to investigate the documentation about this behavior or contact the package creator about this specific point. One might also want here to create a wrapper around <code>syn()</code> that outputs a dataframe directly, orders rows by an ID variable and keeps booleans as booleans.</p>
-<pre class="r"><code>mysyn &lt;- mysyn %&gt;% mutate(Died = ifelse(Died == 1, FALSE, TRUE))
-mysyn</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["ID"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Race"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Sex"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hour"],"name":[5],"type":["times"],"align":["right"]},{"label":["IQ"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Height"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Died"],"name":[8],"type":["lgl"],"align":["right"]}],"data":[{"1":"03","2":"White","3":"46","4":"Male","5":"20:00:00","6":"88","7":"73","8":"FALSE"},{"1":"03","2":"White","3":"85","4":"Female","5":"20:00:00","6":"99","7":"74","8":"FALSE"},{"1":"04","2":"White","3":"52","4":"Female","5":"19:00:00","6":"91","7":"73","8":"TRUE"},{"1":"05","2":"Hispanic","3":"26","4":"Male","5":"22:00:00","6":"95","7":"74","8":"TRUE"},{"1":"05","2":"White","3":"51","4":"Male","5":"09:00:00","6":"99","7":"71","8":"TRUE"},{"1":"06","2":"White","3":"52","4":"Female","5":"22:00:00","6":"109","7":"71","8":"TRUE"},{"1":"07","2":"White","3":"38","4":"Female","5":"09:00:00","6":"91","7":"62","8":"TRUE"},{"1":"08","2":"White","3":"70","4":"Male","5":"19:30:00","6":"91","7":"69","8":"FALSE"},{"1":"09","2":"White","3":"85","4":"Male","5":"19:00:00","6":"109","7":"71","8":"FALSE"},{"1":"10","2":"White","3":"85","4":"Female","5":"01:00:00","6":"88","7":"69","8":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["ID"],"name":[1],"type":["fct"],"align":["left"]},{"label":["Race"],"name":[2],"type":["fct"],"align":["left"]},{"label":["Age"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Sex"],"name":[4],"type":["fct"],"align":["left"]},{"label":["Hour"],"name":[5],"type":["times"],"align":["right"]},{"label":["IQ"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Height"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Died"],"name":[8],"type":["lgl"],"align":["right"]}],"data":[{"1":"01","2":"White","3":"40","4":"Male","5":"22:00:00","6":"114","7":"66","8":"TRUE"},{"1":"02","2":"White","3":"22","4":"Female","5":"03:30:00","6":"96","7":"66","8":"TRUE"},{"1":"03","2":"White","3":"40","4":"Male","5":"02:00:00","6":"108","7":"73","8":"TRUE"},{"1":"04","2":"White","3":"22","4":"Female","5":"02:30:00","6":"108","7":"73","8":"FALSE"},{"1":"05","2":"White","3":"43","4":"Male","5":"01:00:00","6":"103","7":"71","8":"TRUE"},{"1":"06","2":"Asian","3":"47","4":"Female","5":"07:00:00","6":"92","7":"71","8":"TRUE"},{"1":"07","2":"White","3":"32","4":"Female","5":"12:00:00","6":"90","7":"70","8":"TRUE"},{"1":"07","2":"Asian","3":"26","4":"Male","5":"08:30:00","6":"103","7":"71","8":"TRUE"},{"1":"10","2":"White","3":"47","4":"Female","5":"02:30:00","6":"121","7":"69","8":"TRUE"},{"1":"10","2":"White","3":"68","4":"Male","5":"01:00:00","6":"108","7":"71","8":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Note: <code>shuffle_cols()</code> preserves the actual values within each column but destroys the relationships between columns; <code>syn()</code> on the other hand, aims to maintain the relationships between variables but alters the values. You can see this for yourself by inspecting the values of a variable across datasets:</p>
-<pre class="r"><code>print(sort(df$Age))    </code></pre>
-<pre><code>##  [1] 26 26 38 46 51 52 52 70 81 85</code></pre>
-<pre class="r"><code>print(sort(df_shuffle$Age))    </code></pre>
-<pre><code>##  [1] 26 26 38 46 51 52 52 70 81 85</code></pre>
-<pre class="r"><code>print(sort(mysyn$Age))</code></pre>
-<pre><code>##  [1] 26 38 46 51 52 52 70 85 85 85</code></pre>
+<pre><code>##  [1] 22 26 32 32 40 43 45 47 52 68</code></pre>
+<pre><code>##  [1] 22 26 32 32 40 43 45 47 52 68</code></pre>
+<pre><code>##  [1] 22 22 26 32 40 40 43 47 47 68</code></pre>
 </div>
 <div id="variant-3-combine-both-measures" class="section level3">
 <h3>Variant 3: combine both measures</h3>

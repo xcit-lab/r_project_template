@@ -16,7 +16,7 @@ knit: (function(inputFile, encoding) {
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, echo=FALSE, message=FALSE)
 ```
 
 
@@ -27,13 +27,16 @@ We want to create a synthetic dataset from an existing one. The synthetics datas
 
 
 Why is this useful?
+
 Reasons for creating synthetic datasets inlcude:
+
   - anonymizing datasets
   - create dummy datasets for testing code
 
 ## Requirements
 
 For this tutorial we will use the following packages:
+
  - tidyverse: (default) for basic data manipulation
  - wakefield: to create a dataset with different kinds of columns
  - synthpop: to synthesize a dataset
@@ -109,6 +112,7 @@ shuffle_cols <- function(df){
 
 
 Then we apply that function to the original dataset to create a synthetic dataset:
+
 ```{r} 
 df_shuffle <- shuffle_cols(df)
 df_shuffle
